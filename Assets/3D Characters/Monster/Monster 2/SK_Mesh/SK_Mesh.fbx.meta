@@ -3,7 +3,37 @@ guid: b43f7185de097d841b36caaf23da4410
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Demon_final_2_Body
+    second: {fileID: 2100000, guid: d2cc4fdfaef5d2243a4f8e894db84330, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Demon_final_2_Eye_in_LP
+    second: {fileID: 2100000, guid: 6026ac8ce3ed2c449b874a53f844123b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Demon_final_2_Eye_out_LP
+    second: {fileID: 2100000, guid: b58cd62366980094b8ce308bf0dd0f95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Demon_final_2_Fur
+    second: {fileID: 2100000, guid: 73ab8f7bc7faca14c80c80ce9589fa5d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Demon_final_2_Mace
+    second: {fileID: 2100000, guid: bad7ad61c198013438b9f3a282ba5829, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Demon_final_2_mouth
+    second: {fileID: 2100000, guid: 46197da857defe34fac4e943b3f36744, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
