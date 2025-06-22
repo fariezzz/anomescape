@@ -4,15 +4,15 @@ using UnityEngine.UI;
 public class EnemyVision : MonoBehaviour
 {
     // public Transform head;
-    public float detectRange = 8f;
-    public float detectAngle = 30f;
+    public float detectRange = 15f;
+    public float detectAngle = 80f;
 
     public GameObject player;
     public Text rangeText, hiddenText, angleText, detectedText;
 
     bool isInRange, isInAngle, isNotHidden;
     public bool PlayerVisible => isInRange && isInAngle && isNotHidden;
-    public bool PlayerFullySafe => !isInRange && !isNotHidden && !isInAngle;
+    public bool PlayerFullySafe => !isNotHidden && !isInAngle;
 
     void Update()
     {
@@ -33,24 +33,24 @@ public class EnemyVision : MonoBehaviour
         }
 
         Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
-        // Debug.DrawRay(transform.position, directionToPlayer * detectRange, Color.red);
+
         RaycastHit hit;
-        int layerMask = LayerMask.GetMask("Player", "Obstacle"); // buat layer sesuai kebutuhan
-        Physics.Raycast(transform.position, directionToPlayer, out hit, detectRange, layerMask);
-        if (Physics.Raycast(transform.position, directionToPlayer, out hit, detectRange))
+        
+        if (Physics.Raycast(transform.position, directionToPlayer, out hit, Mathf.Infinity))
         {
             if (hit.transform == player.transform)
             {
                 isNotHidden = true;
                 hiddenText.text = "YOU'RE NOT HIDDEN!";
                 hiddenText.color = Color.red;
+                Debug.DrawRay(transform.position, directionToPlayer * hit.distance, Color.red);
             }
             else
             {
                 isNotHidden = false;
                 hiddenText.text = "YOU'RE HIDDEN!";
                 hiddenText.color = Color.green;
-                // Debug.DrawRay(transform.position, directionToPlayer * hit.distance, Color.yellow);
+                Debug.DrawRay(transform.position, directionToPlayer * hit.distance, Color.yellow);
             }
         }
         else
@@ -58,7 +58,7 @@ public class EnemyVision : MonoBehaviour
             isNotHidden = false;
             hiddenText.text = "YOU'RE HIDDEN!";
             hiddenText.color = Color.green;
-            // Debug.DrawRay(transform.position, directionToPlayer * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position, directionToPlayer * hit.distance, Color.yellow);
         }
 
         Vector3 side1 = player.transform.position - transform.position;
@@ -82,7 +82,7 @@ public class EnemyVision : MonoBehaviour
             detectedText.text = "Player Detected!";
             detectedText.color = Color.red;
         }
-        else
+        else if (!isInAngle && !isNotHidden)
         {
             detectedText.text = "Player Undetected!";
             detectedText.color = Color.green;
