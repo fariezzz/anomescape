@@ -1,37 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 300f;
-    public Transform playerBody;
+    [SerializeField] bool invert = false;
+    [SerializeField] float sensitivity = 10.0f;
 
-    float xRotation = 0f;
 
+    [SerializeField] Camera playerCamera;
+    [SerializeField] Transform playerBody;
+
+    private float rotationX = 0;
+    private float rotationY = 0;
+
+    // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // Kunci cursor
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
+    // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Biar gak muter 360 derajat
 
-        // Putar kamera ke atas bawah
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-        // Putar badan player ke kiri kanan
-        if (playerBody != null)
+        rotationY += mouseX; // Rotate around the Y-axis
+        if (invert)
         {
-            playerBody.Rotate(Vector3.up * mouseX);
+            rotationX -= -Input.GetAxis("Mouse Y") * sensitivity;
         }
         else
         {
-            Debug.LogWarning("playerBody belum di-assign di Inspector!");
+            rotationX += -Input.GetAxis("Mouse Y") * sensitivity;
         }
+        // rotationX += -Input.GetAxis("Mouse Y") * sensitivity;
+        rotationX = Mathf.Clamp(rotationX, -90, 90);
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sensitivity, 0);
     }
 }
