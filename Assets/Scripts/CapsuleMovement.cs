@@ -12,6 +12,9 @@ public class CapsuleMovement : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
 
+    [Header("Noise Manager")]
+    public float noiseRadius = 15f;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -35,4 +38,17 @@ public class CapsuleMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+
+    //public void MakeNoise()
+    //{
+    //    Collider[] enemies = Physics.OverlapSphere(transform.position, 30f, LayerMask.GetMask("Enemy"));
+    //    foreach (Collider col in enemies)
+    //    {
+    //        var enemy = col.GetComponent<EnemyAI>();
+    //        if (enemy != null)
+    //        {
+    //            enemy.ReportNoise(transform.position);
+    //        }
+    //    }
+    //}
 }

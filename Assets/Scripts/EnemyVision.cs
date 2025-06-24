@@ -36,7 +36,7 @@ public class EnemyVision : MonoBehaviour
 
         RaycastHit hit;
         
-        if (Physics.Raycast(transform.position, directionToPlayer, out hit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, directionToPlayer, out hit, Mathf.Infinity, ~LayerMask.GetMask("Enemy")))
         {
             if (hit.transform == player.transform)
             {

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -15,16 +14,19 @@ public class AudioManager : MonoBehaviour
 
     public void TransitionBGM(AudioSource from, AudioSource to, float fadeDuration = 1f)
     {
+        if (to.isPlaying && from != to) return;
+
         StartCoroutine(FadeBGM(from, to, fadeDuration));
     }
 
-    private System.Collections.IEnumerator FadeBGM(
-        AudioSource from, AudioSource to, float duration)
+    private IEnumerator FadeBGM(AudioSource from, AudioSource to, float duration)
     {
         float t = 0f;
         float startVol = from.volume;
+
+        // Cegah overlap kalau sudah jalan
+        if (!to.isPlaying) to.Play();
         to.volume = 0f;
-        to.Play();
 
         while (t < duration)
         {

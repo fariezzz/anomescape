@@ -3,37 +3,46 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public enum State { Patrol, Chase, Search }
-    public State currentState = State.Patrol;
+    public enum State { Patrol, Chase, Search, SearchNoise }
 
+    [Header("State")]
+    public State currentState;
+
+    [Header("Targets & Waypoints")]
     public Transform player;
     public Transform[] waypoints;
     int currentWaypoint = 0;
 
-    public float searchDuration = 5f;
-
+    [Header("Detection")]
     public float patrolDetectRange = 10f;
     public float chaseDetectRange = 18f;
-
     public float patrolDetectAngle = 80f;
     public float chaseDetectAngle = 140f;
 
+    [Header("Movement")]
     public float patrolSpeed = 2f;
     public float chaseSpeed = 4f;
-
     public float patrolAngularSpeed = 180f;
     public float chaseAngularSpeed = 400f;
-
     public float patrolAccel = 5f;
     public float chaseAccel = 9f;
 
+    [Header("Components")]
     public NavMeshAgent agent;
     public Animator animator;
     public EnemyVision enemyVision;
 
-    float searchTimer;
+    [Header("Search")]
+    public float searchDuration = 5f;
+    [SerializeField] private float searchTimer;
 
-    void Start() => SetState(State.Patrol);
+    [Header("Noise")]
+    private Vector3 lastHeardPosition;
+
+    void Start()
+    {
+        SetState(State.Patrol);
+    }
 
     void Update()
     {
@@ -42,6 +51,7 @@ public class EnemyAI : MonoBehaviour
             case State.Patrol: Patrol(); break;
             case State.Chase: Chase(); break;
             case State.Search: Search(); break;
+            case State.SearchNoise: SearchNoise(); break;
         }
 
         LookForPlayer();
@@ -54,7 +64,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (enemyVision.PlayerVisible && currentState != State.Chase)
         {
-            SetState(State.Chase); // ganti state
+            SetState(State.Chase);
         }
     }
 
@@ -100,6 +110,31 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    void SearchNoise()
+    {
+        enemyVision.detectRange = patrolDetectRange;
+        enemyVision.detectAngle = patrolDetectAngle;
+        agent.speed = patrolSpeed;
+        agent.angularSpeed = patrolAngularSpeed;
+        agent.acceleration = patrolAccel;
+        animator.SetBool("isRunning", false);
+
+        if (enemyVision.PlayerVisible)
+        {
+            SetState(State.Chase);
+            return;
+        }
+
+        agent.destination = lastHeardPosition;
+
+        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        {
+            SetState(State.Search);
+            searchTimer = searchDuration;
+        }
+    }
+
+
     void GotoNextWaypoint()
     {
         if (waypoints.Length == 0) return;
@@ -109,13 +144,13 @@ public class EnemyAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
+        if (currentState == State.Chase) return;
         if (col.CompareTag("Player") && currentState != State.Chase)
         {
-            Debug.Log("Player touched enemy");
             Vector3 dirToPlayer = player.position - transform.position;
             dirToPlayer.y = 0;
             transform.rotation = Quaternion.LookRotation(dirToPlayer);
-            SetState(State.Chase); // masuk chase
+            SetState(State.Chase);
         }
     }
 
@@ -123,22 +158,34 @@ public class EnemyAI : MonoBehaviour
     {
         currentState = newState;
 
-        // Atur BGM di sini
         switch (newState)
         {
             case State.Patrol:
                 AudioManager.Instance.TransitionBGM(
-                    AudioManager.Instance.chaseBGMSource,
-                    AudioManager.Instance.patrolBGMSource,
-                    1f);
-                break;
+                AudioManager.Instance.chaseBGMSource,
+                AudioManager.Instance.patrolBGMSource,
+                1f);
+            break;
 
             case State.Chase:
                 AudioManager.Instance.TransitionBGM(
-                    AudioManager.Instance.patrolBGMSource,
-                    AudioManager.Instance.chaseBGMSource,
-                    1f);
-                break;
+                AudioManager.Instance.patrolBGMSource,
+                AudioManager.Instance.chaseBGMSource,
+                1f);
+            break;
         }
     }
+
+    public void ReportNoise(Vector3 noisePosition)
+    {
+        if (currentState == State.Chase || currentState == State.SearchNoise || currentState == State.Search) return;
+
+        float distance = Vector3.Distance(transform.position, noisePosition);
+        if (distance <= patrolDetectRange)
+        {
+            SetState(State.SearchNoise);
+            lastHeardPosition = noisePosition;
+        }
+    }
+
 }
