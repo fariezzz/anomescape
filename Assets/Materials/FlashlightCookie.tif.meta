@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Materials/FlashlightCookie.tif.meta
 guid: b9e553dbae107ee4e8ed207e0127e660
+========
+guid: 03a289c2992bda14b9fdca51c49e6817
+>>>>>>>> Stashed changes:Assets/3D Assets/3D Object/Map lvl 1/Kabin/Kabin/textures/light_boards/boards_bc.jpg.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
