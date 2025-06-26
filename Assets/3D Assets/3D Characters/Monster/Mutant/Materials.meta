@@ -1,13 +1,9 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream:Assets/3D Characters/Monster/Mutant/Materials.meta
-<<<<<<<< Updated upstream:Assets/3D Assets/3D Characters/Monster/Mutant/Materials.meta
-guid: 76d073a4065bc6f4db4e36be5f51f05c
-========
-guid: e6d5580c44cdaa74aa65472f25206b18
->>>>>>>> Stashed changes:Assets/3D Assets/3D Characters/Monster/Monster 2.meta
+<<<<<<< Updated upstream
+guid: b3bce1d15df0c3b4b87ae665434fce1a
 =======
-guid: 109df76a6b4066744a751994a3310458
->>>>>>> Stashed changes:Assets/3D Assets/3D Characters/Monster/Mutant/Materials.meta
+guid: bb24ef2a1a58e2241a109e1ce841e1c3
+>>>>>>> Stashed changes
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

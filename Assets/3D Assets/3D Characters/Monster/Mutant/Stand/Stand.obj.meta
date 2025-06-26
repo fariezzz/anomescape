@@ -1,35 +1,24 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream:Assets/3D Characters/Monster/Mutant/Stand/Stand.obj.meta
-<<<<<<<< Updated upstream:Assets/3D Assets/3D Characters/Monster/Mutant/Stand/Stand.obj.meta
-guid: 4eddd2d8930802d49b9eec676e2f687f
-========
-guid: b4e9630f0d7a1674da1bee77141f5664
->>>>>>>> Stashed changes:Assets/3D Assets/3D Object/Map lvl 1/Kabin/Kabin/model/LOD0_viking_eagle_hut.3ds.meta
+<<<<<<< Updated upstream
+guid: 81695178091767743b070222f44b70ce
 =======
-guid: e1e2e50dfd56df34e95d56e3f52d844c
->>>>>>> Stashed changes:Assets/3D Assets/3D Characters/Monster/Mutant/Stand/Stand.obj.meta
+guid: 5c6f3e2a1afa77541ba67c898f037aaf
+>>>>>>> Stashed changes
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Cylinder001
-    100002: //RootNode
-    400000: Cylinder001
-    400002: //RootNode
-    2100000: Cylinder001Mat
-    2300000: Cylinder001
-    3300000: Cylinder001
-    4300000: Cylinder001
+  serializedVersion: 22200
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -47,32 +36,43 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -81,10 +81,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -94,13 +94,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

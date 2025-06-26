@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream:Assets/3D Characters/Monster/Mutant/Base mesh/Materials.meta
-<<<<<<<< Updated upstream:Assets/3D Assets/3D Characters/Monster/Mutant/Base mesh/Materials.meta
-guid: b8108284afb2dce478749a5da756da26
-========
-guid: e61398316ef97004e890d6b69fc6103b
->>>>>>>> Stashed changes:Assets/Materials.meta
-=======
-guid: 35a8b999c5862cc4d8c67323237f9a16
->>>>>>> Stashed changes:Assets/3D Assets/3D Characters/Monster/Mutant/Base mesh/Materials.meta
+guid: 393d142f367a3f045a1a5fed71831da2
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
