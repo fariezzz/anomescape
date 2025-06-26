@@ -8,10 +8,8 @@ public class EnemyAI : MonoBehaviour
     [Header("State")]
     public State currentState;
 
-    [Header("Targets & Waypoints")]
+    [Header("Targets")]
     public Transform player;
-    public Transform[] waypoints;
-    int currentWaypoint = 0;
 
     [Header("Detection")]
     public float patrolDetectRange = 10f;
@@ -41,6 +39,7 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+        agent.stoppingDistance = 0;
         SetState(State.Patrol);
     }
 
@@ -90,7 +89,15 @@ public class EnemyAI : MonoBehaviour
         agent.acceleration = chaseAccel;
         animator.SetBool("isRunning", true);
 
+        agent.isStopped = false;
         agent.destination = player.position;
+
+        Debug.Log(
+        $"pathPending={agent.pathPending}, " +
+        $"hasPath={agent.hasPath}, " +
+        $"remainingDistance={agent.remainingDistance}, " +
+        $"velocity={agent.velocity}"
+    );
 
         if (enemyVision.PlayerFullySafe)
         {
@@ -137,9 +144,13 @@ public class EnemyAI : MonoBehaviour
 
     void GotoNextWaypoint()
     {
-        if (waypoints.Length == 0) return;
-        agent.destination = waypoints[currentWaypoint].position;
-        currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
+        Vector3 randomDirection = Random.insideUnitSphere * enemyVision.detectRange;
+        randomDirection += transform.position;
+
+        if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, enemyVision.detectRange, NavMesh.AllAreas))
+        {
+            agent.destination = hit.position;
+        }
     }
 
     private void OnTriggerEnter(Collider col)
